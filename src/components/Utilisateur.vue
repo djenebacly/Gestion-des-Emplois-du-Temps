@@ -8,29 +8,31 @@
 
 
         <div class="main-contenair">
-            <h1 class="main-title">Liste des Cours</h1>
+            <h1 class="main-title">Liste des Utilisateurs</h1>
             <section class="recent-orders">
-                <router-link to="AddCours" class="add">Ajouter</router-link>
+                <router-link to="AddUtilisateur" class="add">Ajouter</router-link>
                 <table>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Matière</th>
-                            <th>Description</th>
+                            <th>Nombre d'etudiant</th>
+                            <th>Niveau</th>
+                            <th>Filière</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in cours" :key="item.id">
+                        <tr v-for="item in classe" :key="item.id">
                             <td>{{ item.id }}</td>
-                            <td>{{ item.matiere }}</td>
-                            <td>{{ item.description }}</td>
+                            <td>{{ item.nbrEtudiant }}</td>
+                            <td>{{ item.idNiveaux }}</td>
+                            <td>{{ item.idFiliere }}</td>
                             <td>
-                                <button> <router-link :to="'modifcours/' + item.id"><span
+                                <button> <router-link :to="'modifclasse/' + item.id"><span
                                             class="material-icons-sharp green">
                                             edit
                                         </span></router-link>
                                 </button>
-                                <button v-on:click="supCours(item.id)"><span class="material-icons-sharp red">
+                                <button v-on:click="supClasse(item.id)"><span class="material-icons-sharp red">
                                         delete
                                     </span>
                                 </button>
@@ -60,20 +62,19 @@ export default {
 
     data() {
         return {
-            cours: [],
+            classe: [],
         }
     },
-
     methods: {
-        async supCours(id) {
-            let result = await axios.delete("http://localhost:3000/cours/" + id);
+        async supClasse(id) {
+            let result = await axios.delete("http://localhost:3000/classe/" + id);
             if (result == 200) {
                 this.loadData()
             }
         },
         async loadData() {
-            let result = await axios.get("http://localhost:3000/cours");
-            this.cours = result.data;
+            let result = await axios.get("http://localhost:3000/classe");
+            this.classe = result.data;
         }
     },
 

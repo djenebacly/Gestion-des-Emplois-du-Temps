@@ -15,7 +15,7 @@
 <div class="sidebar">
     <ul class="list-items">
         <li class="item">
-            <router-link to="/">
+            <router-link to="/Acceuil">
                 <span class="material-icons-sharp">
                     dashboard
                 </span>
@@ -71,7 +71,15 @@
             </router-link>
         </li>
         <li class="item">
-            <a href="#">
+            <router-link to="/Utilisateur">
+                <span class="material-icons-sharp">
+                    person
+                </span>
+                <span>Utilisateur</span>
+            </router-link>
+        </li>
+        <li class="item">
+            <a href="#" v-on:click="logout">
                 <span class="material-icons-sharp">
                     power_settings_new
                 </span>
@@ -82,3 +90,29 @@
 </div>
 </template>
 
+<script>
+export default{
+    data() {
+        return {
+            login: '',
+            role: '',
+        }
+    },
+
+    mounted() {
+        let utilisateur = localStorage.getItem('utilisateur-info');
+        this.login = JSON.parse(utilisateur).login;
+        this.role = JSON.parse(utilisateur).role;
+        if (!utilisateur) {
+            //this.$router.push({name: 'Acceuil'})
+        }
+    },
+
+    methods:{
+        async logout(){
+            localStorage.clear();
+            this.$router.push({name:'Connexion'})
+        }
+    }
+}
+</script>

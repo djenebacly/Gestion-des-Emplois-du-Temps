@@ -8,58 +8,46 @@
 
 
         <div class="main-contenair">
-            <h1 class="main-title">Séance</h1>
-            <form action="">
-                <!--<div class="haut">
-                    <label for="idSeance">ID</label>
-                    <input type="number" name="idSeance" id="idSeance">
-                </div>-->
-                <div class="ensemble">
-                    <div class="gauche">
-                        <div>
-                            <label for="type">Type</label>
-                            <select name="type" id="type">
-                                <option value="0">----Choisie----</option>
-                                <option value="CM">CM</option>
-                                <option value="TP">TP</option>
-                                <option value="TD">TD</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="heureDebut">Heure Début</label>
-                            <input type="number" name="heureDebut" id="heureDebut">
-                        </div>
-                        <div>
-                            <label for="heurePauseDebut">Heure Pause Début</label>
-                            <input type="number" name="heurePauseDebut" id="heurePauseDebut">
-                        </div>
-                        <div>
-                            <label for="enseignant">Enseignant</label>
-                            <select name="enseignant" id="enseignant">
-                                <option value="0">----Choisie----</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="droite">
-                        <div>
-                            <label for="horaire">Horaire</label>
-                            <input type="number" name="horaire" id="horaire">
-                        </div>
-                        <div>
-                            <label for="heureFin">Heure Fint</label>
-                            <input type="number" name="heureFin" id="heureFin">
-                        </div>
-                        <div>
-                            <label for="heurePauseFin">Heure Pause Fin</label>
-                            <input type="number" name="heurePauseFin" id="heurePauseFin">
-                        </div>
-                    </div>
-                </div>
-                <div class="bas">
-                    <input type="submit" value="Ajouter" class="ajouter">
-                    <input type="reset" value="Annuler" class="annuler">
-                </div>
-            </form>
+            <h1 class="main-title">Liste des Séances</h1>
+            <section class="recent-orders">
+                <router-link to="AddSeance" class="add">Programmer</router-link>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Horaire</th>
+                        <th>Heure Début</th>
+                        <th>Heure Fin</th>
+                        <th>Salle</th>
+                        <th>Classe</th>
+                        <th>Cours</th>
+                        <th>Enseignant</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr v-for="item in seance" :key="item.id">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.type }}</td>
+                        <td>{{ item.horaire }}</td>
+                        <td>{{ item.heureDebut }}</td>
+                        <td>{{ item.heureFin }}</td>
+                        <td>{{ item.idSalle }}</td>
+                        <td>{{ item.idClasse }}</td>
+                        <td>{{ item.idCours }}</td>
+                        <td>{{ item.idEnseignant }}</td>
+                        <td>
+                                <button> <router-link :to="'modifseance/' + item.id"><span
+                                            class="material-icons-sharp green">
+                                            edit
+                                        </span></router-link>
+                                </button>
+                                <button v-on:click="supSeance(item.id)"><span class="material-icons-sharp red">
+                                        delete
+                                    </span>
+                                </button>
+                            </td>
+                    </tr>
+                </table>
+            </section>
         </div>
 
 
@@ -70,13 +58,36 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Extrabar from './Extrabar.vue';
 import Sidebar from './Sidebar.vue';
-export default{
-    components:{
+export default {
+    components: {
         Extrabar,
         Sidebar,
     },
+
+    data() {
+        return {
+            seance: [],
+        }
+    },
+    methods: {
+        async supSeance(id) {
+            let result = await axios.delete("http://localhost:3000/seance/" + id);
+            if (result == 200) {
+                this.loadData()
+            }
+        },
+        async loadData() {
+            let result = await axios.get("http://localhost:3000/seance");
+            this.seance = result.data;
+        }
+    },
+
+    async mounted() {
+        this.loadData();
+    }
 }
 
 </script>

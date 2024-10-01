@@ -5,7 +5,7 @@
     <div class="dashboard-container">
         <div class="main-sidebar">
             <Sidebar />
-           
+
         </div>
 
 
@@ -95,72 +95,113 @@
 
             <section class="recent-orders">
                 <div class="ro-title">
-                    <h2 class="recent-orders-title">Les emplois du temps récents</h2>
+                    <h2 class="recent-orders-title">L'emplois du temps</h2>
                     <a href="#" class="Show all">Tout affiché</a>
                 </div>
+                <input type="text" placeholder="Ex:05 au 10 Janvier 2025" name="dateDF" id="dateDF">
+                <div class="emplois" v-for="item in seance" :key="item.id">
+                    <div class="trait">
+                        <img src="/public/UNIVERSITE.png" alt="PHOTO" height="100px">
+                        <div class="inst">Institut Universitaire de Formation Professionnelle</div>
+                        <div class="edt">Emplois du temps </div>
+                    </div>
+                    <div class="ro-title">
+                        <h4>Classe : {{ item.idClasse }}</h4>
+                        <h4>Salle :{{ item.idSalle }}</h4>
+                    </div>
+                    <table class="tableau" border="1">
+                        <tr>
+                            <th>Horaire</th>
+                            <th>Lundi</th>
+                            <th>Mardi</th>
+                            <th>Mercredi</th>
+                            <th>Jeudi</th>
+                            <th>Vendredi</th>
+                            <th>Samedi</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>{{ item.heureDebut }}h - {{ item.heurePauseDebut }}h</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>Examen</div>
+                                <div>{{ item.heureExamenDebut }}h - {{ item.heureExamenFin }}h</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>{{ item.heurePauseDebut }}h - {{ item.heurePauseFin }}h</div>
+                            </td>
+                            <td>
+                                <div>Pause</div>
+                            </td>
+                            <td>
+                                <div>Pause</div>
+                            </td>
+                            <td>
+                                <div>Pause</div>
+                            </td>
+                            <td>
+                                <div>Pause</div>
+                            </td>
+                            <td>
+                                <div>Pause</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>{{ item.heurePauseFin }}h - {{ item.heureFin }}h</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                            <td>
+                                <div>{{ item.idEnseignant }}</div>
+                                <div>{{ item.idCours }}</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="cote">
+                        <div class="date">Ségou, le <input type="text" placeholder="Ex:01 Janvier 2025" ></div>
+                        <div class="der">Le Chef de DER ST</div>
+                        <div class="date">DR Amadou K. dit AMOBO Waïgalo</div>
+                        <div class="gder">Maître-Assistant</div>
+                    </div>
+                </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Produit</th>
-                            <th>Serie</th>
-                            <th>Payé</th>
-                            <th>Min</th>
-                            <th>Jous</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>12</td>
-                            <td>PC</td>
-                            <td>fdsf667</td>
-                            <td class="text">NON</td>
-                            <td>9 minim</td>
-                            <td>3 jours restants</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>PC</td>
-                            <td>fdsf667</td>
-                            <td class="text">NON</td>
-                            <td>9 minim</td>
-                            <td>3 jours restants</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>PC</td>
-                            <td>fdsf667</td>
-                            <td class="text">NON</td>
-                            <td>9 minim</td>
-                            <td>3 jours restants</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>PC</td>
-                            <td>fdsf667</td>
-                            <td class="text">NON</td>
-                            <td>9 minim</td>
-                            <td>3 jours restants</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>PC</td>
-                            <td>fdsf667</td>
-                            <td class="text">NON</td>
-                            <td>9 minim</td>
-                            <td>3 jours restants</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>PC</td>
-                            <td>fdsf667</td>
-                            <td class="text">NON</td>
-                            <td>9 minim</td>
-                            <td>3 jours restants</td>
-                        </tr>
-                    </tbody>
-                </table>
 
             </section>
         </div>
@@ -168,19 +209,38 @@
 
         <div class="extrabar">
             <Extrabar />
-            
+
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 import Extrabar from './Extrabar.vue';
 import Sidebar from './Sidebar.vue';
-export default{
-    components:{
+export default {
+    components: {
         Extrabar,
         Sidebar,
     },
+
+    data() {
+        return {
+            seance: [],
+
+        }
+    },
+
+    async mounted() {
+        let utilisateur = localStorage.getItem('utilisateur-info');
+        if (!utilisateur) {
+            // this.$router.push({name: 'SignUp'})
+        }
+
+        let result = await axios.get("http://localhost:3000/seance");
+        this.seance = result.data;
+    }
+
 }
 
 </script>

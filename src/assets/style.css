@@ -11,8 +11,11 @@
     --desaturate-cyan:hsl(184, 46%, 57%, 0.25);
     --desaturate-cyan-2:hsl(184, 46%, 57%, 0.15);
     --light-blue:#bbeef1;
-    --pinkless:#fff3e0;
+    --pinkless:#ffeed3;
     --yellow:#f1b813;
+    --pink:#be4b34;
+    --lg:#16eac9;
+    --fc:#8f9699;
 
     --text-color-primary:#314657;
     --text-color-secondary:#58626e;
@@ -60,6 +63,11 @@ body{
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
+/*#app{
+    width: 100%;
+    height: 100%;
+}*/
+
 /* Début Acceuil */
 
 ul{
@@ -80,6 +88,17 @@ a:hover{
     vertical-align: middle;
 }
 
+button{
+    border: none;
+}
+.red{
+    color: rgba(207, 11, 11, 0.856);
+}
+
+.green{
+    color: rgb(19, 163, 19);
+}
+
 .text-primary{
     color: var(--text-color-primary);
 }
@@ -92,16 +111,12 @@ a:hover{
     color: var(--text-color-third);
 }
 
-#app{
-width: 100%;
-height: 100%;
-}
 
 .dashboard-container{
     display: grid;
     grid-template-columns: 2fr 8fr 2fr;
     grid-template-areas: 'sidebar main extrabar';
-    gap: 20px;
+    
     height: 100%;
 }
 
@@ -110,7 +125,7 @@ height: 100%;
 .main-sidebar{
     grid-area: sidebar;
    height: 100%;
-   width: 300px;
+   width: 280px;
    padding: 20px 0 20px;
 }
 
@@ -315,6 +330,7 @@ height: 100%;
     transition: box-shadow 0.3s ease-in-out;
     overflow: hidden;
     border-spacing: 0;
+    margin-top: 10px;
 }
 
 .recent-orders table:hover{
@@ -322,7 +338,8 @@ height: 100%;
 }
 
 .recent-orders thead th, .recent-orders tbody td{
-    padding: 12px 24px;
+    padding: 10px 10px;
+    font-size: 18px;
 }
 
 .recent-orders table tr{
@@ -337,8 +354,84 @@ height: 100%;
     background-color: var(--desaturate-fuscha-2) !important;
 }
 
+.recent-orders .add{
+    font-size: 25px;
+    color: green;
+    margin-left: 80%;
+       
+}
 
+.emplois{
+    margin-bottom: 50px;
+}
 
+tr:first-child{
+    height: 30px;
+}
+
+tr{
+    height: 80px;
+}
+
+.tr{
+    width: 100px;
+}
+.tableau{
+    margin-bottom: 50px;
+    color: #222831;
+}
+
+.inst{
+    display: flex;
+    font-size: 25px;
+    color: #f1b813;
+   justify-content: center;
+   margin-bottom: 10px;
+}
+
+.edt{
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.edt input{
+    margin-left: 5px;
+    background-color: var(--light);
+    border: none;
+    font-size: 20px;
+}
+.trait{
+    border-bottom: 3px solid black;
+    margin-bottom: 20px;
+}
+
+.cote{
+    display: grid;
+    justify-content: end;
+}
+
+.date{
+    font-size: 20px;
+    margin-top: 100px;
+}
+.date input{
+    font-size: 20px;
+    background-color: var(--light);
+    border: none;
+}
+
+.der{
+    margin-top: 10px;
+    font-weight: 1000;
+}
+
+.gder{
+    font-style: italic;
+    font-size: 17px;
+    margin-left:70px;
+    
+}
 
 
 .extrabar{
@@ -346,6 +439,7 @@ height: 100%;
     padding: 20px 5px 20px 0;
     transition: background-color .3s ease-in-out;
     margin: 0;
+    width: 200px;
 }
 
 .extrabar .header-right{
@@ -353,7 +447,7 @@ height: 100%;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 3rem;
+    margin-top: 1rem;
 }
 
 .header-right .toggle-menu-btn{
@@ -389,16 +483,32 @@ height: 100%;
     color: var(--light);
 }
 
-.header-right .profile{
+.profiles{
+    margin-top: 1rem;
+}
+
+.profiles .profile{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
 }
 
-.header-right .profile .profile-info{
+.profile-icon .material-icons-sharp{
+    /* display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-right: 16px;
+     border-radius: var(--border-radius-rounded);
+     overflow: hidden;*/
+     font-size: 100px;
+ }
+ 
+
+.header-profiles .profile .profile-info{
     font-size: 16px;
 }
+
 
 .recent-updates{
     background-color: var(--white);
@@ -426,15 +536,6 @@ height: 100%;
     text-align: center;
 }
 
-.profile-image{
-    width: 94px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 16px;
-    border-radius: var(--border-radius-rounded);
-    overflow: hidden;
-}
 
 
 
@@ -476,7 +577,7 @@ height: 100%;
 
 /* Fin Acceuil*/
 
-/* Début Filiere */
+/* Début des classes*/
 
 .ensemble{
     display: grid;
@@ -497,10 +598,12 @@ form{
 
 form label{
     font-size: 20px;
+    margin-left: 30px
 }
 
 .haut input{
-    margin-left: 60px;
+    margin-left: 5px;
+    display: grid;
 }
 
 .ensemble input{
@@ -508,7 +611,7 @@ form label{
     margin-bottom: 20px;
 }
 
-.haut input:hover, .ensemble input:hover{
+.haut input:hover, .ensemble input, .ensemble select, .ensemble textarea:hover{
     box-shadow: var(--box-shadow-card-2);
 }
 
@@ -522,6 +625,8 @@ form label{
     background-color: var(--white);
     font-size: 20px;
     padding-left: 5px;
+    margin-left: 10px;
+    margin-bottom: 20px;
 }
 
 .ensemble select{
@@ -557,7 +662,6 @@ form label{
     
 }
 
-
 .droite{
     grid-area: droite;
 }
@@ -572,7 +676,7 @@ form label{
     height: 40px;
     border: none;
     font-size: 20px;
-   border-radius: 5px;
+    border-radius: 5px;
 }
 
 .annuler{
@@ -586,4 +690,25 @@ form label{
 }
 
 
-/* Fin Filiere*/
+/* Fin des classes*/
+
+/* Début d'utilisateur*/
+
+.utili button{
+    width: 150px;
+    height: 40px;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+    background: var(--yellow);
+    margin-left: 20px;
+}
+
+/* Fin d'utilisateur*/
+
+/*Début de connexion*/
+
+
+
+/*Fin de connexion*/
+

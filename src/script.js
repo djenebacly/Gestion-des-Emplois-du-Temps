@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleTheme.addEventListener('click', changeTheme)
 
     function changeTheme() {
-        if (body.classList.contains('dark-mode')) {
+        if (body.classList.contains('mode-sombre')) {
             lightMode();
         }
-        else if (!body.classList.contains('dark-mode')) {
+        else if (!body.classList.contains('mode-sombre')) {
             darkMode();
         }
     }
@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function lightMode() {
-        body.classList.remove('dark-mode')
+        body.classList.remove('mode-sombre')
         light.classList.add('active')
         dark.classList.remove('active')
     }
 
     function darkMode() {
-        body.classList.add('dark-mode')
+        body.classList.add('mode-sombre')
         light.classList.remove('active')
         dark.classList.add('active')
     }

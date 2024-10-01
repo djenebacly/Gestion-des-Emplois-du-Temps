@@ -8,39 +8,41 @@
 
 
         <div class="main-contenair">
-            <h1 class="main-title">Salle</h1>
-            <form action="">
-                <!--<div class="haut">
-                    <label for="idSalle">ID</label>
-                    <input type="number" name="idSalle" id="idSalle">
-                </div>-->
-                <div class="ensemble">
-                    <div class="gauche">
-                        <div>
-                            <label for="libelle">Libellé</label>
-                            <input type="text" name="libelle" id="libelle">
-                        </div>
-                        <div>
-                            <label for="batiment">Bâtiment</label>
-                            <input type="text" name="batiment" id="batiment">
-                        </div>
-                    </div>
-                    <div class="droite">
-                        <div>
-                            <label for="capacite">Capacité</label>
-                            <input type="number" name="capacite" id="capacite">
-                        </div>
-                        <div>
-                            <label for="description">Description</label>
-                            <textarea name="description" id="description" placeholder="Autres description de la salle"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="bas">
-                    <input type="submit" value="Ajouter" class="ajouter">
-                    <input type="reset" value="Annuler" class="annuler">
-                </div>
-            </form>
+            <h1 class="main-title">Liste des Salles</h1>
+            <section class="recent-orders">
+                <router-link to="AddSalle" class="add">Ajouter</router-link>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Libellé</th>
+                            <th>Bâtiment</th>
+                            <th>Capacité</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in salle" :key="item.id">
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.libelle }}</td>
+                            <td>{{ item.batiment }}</td>
+                            <td>{{ item.capacite }}</td>
+                            <td>{{ item.description }}</td>
+                            <td>
+                                <button> <router-link :to="'modifsalle/' + item.id"><span
+                                            class="material-icons-sharp green">
+                                            edit
+                                        </span></router-link>
+                                </button>
+                                <button v-on:click="supSalle(item.id)"><span class="material-icons-sharp red">
+                                        delete
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
         </div>
 
 
@@ -51,13 +53,36 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Extrabar from './Extrabar.vue';
 import Sidebar from './Sidebar.vue';
-export default{
-    components:{
+export default {
+    components: {
         Extrabar,
         Sidebar,
     },
+
+    data() {
+        return {
+            salle: [],
+        }
+    },
+    methods: {
+        async supSalle(id) {
+            let result = await axios.delete("http://localhost:3000/salle/" + id);
+            if (result == 200) {
+                this.loadData()
+            }
+        },
+        async loadData() {
+            let result = await axios.get("http://localhost:3000/salle");
+            this.salle = result.data;
+        }
+    },
+
+    async mounted() {
+        this.loadData();
+    }
 }
 
 </script>

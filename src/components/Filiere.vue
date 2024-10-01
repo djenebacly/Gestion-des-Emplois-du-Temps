@@ -8,31 +8,39 @@
 
 
         <div class="main-contenair">
-            <h1 class="main-title">Filière</h1>
-            <form action="">
-                <!--<div class="haut">
-                    <label for="idFilier">ID</label>
-                    <input type="number" name="idFilier" id="idFilier">
-                </div>-->
-                <div class="ensemble">
-                    <div class="gauche">
-                        <div>
-                            <label for="libelle">Libellé</label>
-                            <input type="text" name="libelle" id="libelle" v-model="filiere.libelle">
-                        </div>
-                    </div>
-                    <div class="droite">
-                        <div>
-                            <label for="nom">Nom</label>
-                            <input type="text" name="nom" id="nom" v-model="filiere.nom">
-                        </div>
-                    </div>
-                </div>
-                <div class="bas">
-                    <input type="submit" value="Ajouter" class="ajouter" v-on:click="addFiliere">
-                    <input type="reset" value="Annuler" class="annuler">
-                </div>
-            </form>
+            <h1 class="main-title">Liste des Filières</h1>
+            <section class="recent-orders">
+
+                <router-link to="AddFiliere" class="add">Ajouter</router-link>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Libellé</th>
+                            <th>Nom</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in filiere" :key="item.id">
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.libelle }}</td>
+                            <td>{{ item.nom }}</td>
+                            <td>
+                                <button> <router-link :to="'modiffiliere/' + item.id"><span
+                                            class="material-icons-sharp green">
+                                            edit
+                                        </span></router-link>
+                                </button>
+                                <button v-on:click="supFiliere(item.id)"><span class="material-icons-sharp red">
+                                        delete
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
         </div>
 
 
@@ -46,33 +54,35 @@
 import axios from 'axios';
 import Extrabar from './Extrabar.vue';
 import Sidebar from './Sidebar.vue';
-export default{
-    components:{
+export default {
+    components: {
         Extrabar,
         Sidebar,
     },
 
-    data(){
-        return{
-            filiere:{
-                libelle:'',
-                nom:'',
-            }
+    data() {
+        return {
+            filiere: [],
         }
     },
-    methods:{
-       async addFiliere(){
-            //console.warn(this.filiere)
-            let result=await axios.post("http://localhost:3000/filiere",{
-                libelle:this.filiere.libelle,
-                nom:this.filiere.nom,
-            })
-            //console.warn("result",result)
-            if (result.status==201) {
-                localStorage.setItem("filiere-info", JSON.stringify(result.data))
-                this.$router.push({name:'Filiere'})
+
+    methods: {
+        async supFiliere(id) {
+            let result = await axios.delete("http://localhost:3000/filiere/" + id);
+            if (result == 200) {
+                this.loadData()
             }
+        },
+        async loadData() {
+            let result = await axios.get("http://localhost:3000/filiere");
+            this.filiere = result.data;
+            this.$router.push({path:'/filiere'})
+
         }
+    },
+
+    async mounted() {
+        this.loadData();
     }
 }
 
